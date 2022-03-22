@@ -11,7 +11,7 @@ function App() {
 	const [status, setStatus] = useState({ code: 'loading', message: '' });
 
 	useEffect(() => {
-		fetch(`http://localhost:5000/api/user`)
+		fetch('/api/user')
 			.then(
 				(value) => value.json(),
 				(error) => setStatus({ code: 'error', message: error.message })
