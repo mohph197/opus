@@ -1,6 +1,8 @@
 function Error(props: {message: string}) {
     return (
-        <h1 className="text-center">{props.message}</h1>
+        <section className="h-screen bg-red-800 flex justify-center items-center">
+            <h1 className="text-4xl text-center font-semibold text-white">{props.message}</h1>
+        </section>
     );
 }
 

@@ -4,7 +4,7 @@ import User from '../../models/user';
 
 const userRouter = Router();
 
-userRouter.get('/', (req, res) => {
+userRouter.get('/', (_, res) => {
 	User.findOne().then((user) => {
 		res.send(user);
 	});

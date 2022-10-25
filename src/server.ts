@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import path from 'path';
 import apiRouter from './routes/api';
-import os from 'os';
 import { existsSync } from 'fs';
 
 dotenv.config();
@@ -21,16 +20,16 @@ mongoose
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(morgan('dev'));
 
 app.use('/api', apiRouter);
 
-app.use((req, res) => {
+app.use((_, res) => {
 	const clientPath = path.join(__dirname, '../client/dist/index.html');
 	if (existsSync(clientPath)) res.sendFile(clientPath);
-	else res.json('404: NOT_FOUND!');
+	else res.status(404).sendFile(path.join(__dirname, './views/error.html'));
 });
 
 app.listen(port, () => {

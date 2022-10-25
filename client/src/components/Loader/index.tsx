@@ -1,5 +1,9 @@
 function Loader() {
-	return <h1 className="text-center">Loading...</h1>;
+	return (
+		<section>
+			<h1 className='text-center'>Loading...</h1>
+		</section>
+	);
 }
 
 export default Loader;

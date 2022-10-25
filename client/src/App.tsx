@@ -12,11 +12,15 @@ function App() {
 
 	useEffect(() => {
 		fetch('/api/user')
-			.then(
-				(value) => value.json(),
-				(error) => setStatus({ code: 'error', message: error.message })
-			)
-			.then((result) => setUser(result));
+			.then((responce) => {
+				if (responce.status === 404)
+					return new Promise<any>((_, reject) =>
+						reject({ message: '404 NOT FOUND!' })
+					);
+				return responce.json();
+			})
+			.then((result) => setUser(result))
+			.catch((error) => setStatus({ code: 'error', message: error.message }));
 	}, []);
 
 	return (
@@ -34,9 +38,9 @@ function App() {
 					)
 				}
 			/>
+			<Route path='*' element={<Error message='404 NOT FOUND!' />} />
 		</Routes>
 	);
 }
 
 export default App;
-
